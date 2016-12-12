@@ -93,6 +93,7 @@ function easyFormDragWayConfig() {
 			{name: 'Header', 					enabled: true},
 			{name: 'Subtitle', 				enabled: true},
 			{name: 'TextInput', 			enabled: true},
+			{name: 'Number', 				enabled: true},
 			{name: 'Password', 				enabled: true},
 			{name: 'Email', 					enabled: true},
 			{name: 'Date', 						enabled: true},

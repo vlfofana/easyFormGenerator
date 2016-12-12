@@ -32,6 +32,9 @@ import leftPanelRadioControl, {
 import leftPanelPasswordControl, {
   LEFT_PANEL_PASSWORD_CONTROL_DIRECTIVE
 }                           from './PasswordControl/edaDragDropWay.leftpanel.passwordControl.directive';
+import leftPanelNumberControl, {
+  LEFT_PANEL_NUMBER_CONTROL_DIRECTIVE
+}                           from './NumberControl/edaDragDropWay.leftpanel.numberControl.directive';
 import leftPanelHeaderControl, {
   LEFT_PANEL_HEADER_CONTROL_DIRECTIVE
 }                           from './HeaderControl/edaDragDropWay.leftpanel.headerControl.directive';
@@ -66,6 +69,7 @@ export default angular
                 .directive(LEFT_PANEL_SUBTITLE_CONTROL_DIRECTIVE, leftPanelSubtitleControl)
                 .directive(LEFT_PANEL_RICH_TEXT_EDITOR_CONTROL_DIRECTIVE, leftPanelRichTextEditorControl)
                 .directive(LEFT_PANEL_RADIO_CONTROL_DIRECTIVE, leftPanelRadioControl)
+                .directive(LEFT_PANEL_NUMBER_CONTROL_DIRECTIVE, leftPanelNumberControl)
                 .directive(LEFT_PANEL_PASSWORD_CONTROL_DIRECTIVE, leftPanelPasswordControl)
                 .directive(LEFT_PANEL_HEADER_CONTROL_DIRECTIVE, leftPanelHeaderControl)
                 .directive(LEFT_PANEL_GROUPED_SELECT_CONTROL_DIRECTIVE, leftPanelGroupedSelectControl)
