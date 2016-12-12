@@ -9,3 +9,5 @@ jspm_packages/
 build/
 
 .idea
+/public
+/dist

@@ -13,7 +13,7 @@ import controllerModalProxy, {
 }                           from './edaDragDropWay.leftPanel.controllerModalProxy.service';
 import leftPanelValidEditFooter, {
   LEFT_PANEL_VALID_EDIT_FOOTER_DIRECTIVE
-}                           from './validEditFooter/edaDragDropWay.leftpanel.validEditFooter.directive';
+}                           from './ValidEditFooter/edaDragDropWay.leftpanel.validEditFooter.directive';
 import leftPanelTextInputControl, {
   LEFT_PANEL_TEXT_INPUT_CONTROL_DIRECTIVE
 }                           from './TextInputControl/edaDragDropWay.leftpanel.textInputControl.directive';

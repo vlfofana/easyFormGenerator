@@ -548,3 +548,13 @@ gulp.task('dist', [
   gulp.src(gulpConfig.srcFiles.app.common.customTextAngularCss, {cwd: gulpConfig.base.root})
     .pipe(gulp.dest(gulpConfig.bower.css ,{cwd: gulpConfig.base.distDir }));
  });
+
+ //public  - all content
+ gulp.task('copy-to-site', [], () => {
+
+
+	//html files
+
+  gulp.src('dist/public/**', {cwd: gulpConfig.base.root})
+    .pipe(gulp.dest('../work/static/formly/public-new/' ,{cwd: gulpConfig.base.root }));
+ });
