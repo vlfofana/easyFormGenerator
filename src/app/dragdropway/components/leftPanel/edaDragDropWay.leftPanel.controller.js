@@ -27,6 +27,9 @@ class leftPanelController{
 		this.basicSelectRowCollection 	= this.controllerModalProxy.basicSelectRowCollection;
 		this.newOptionBasicSelect 			= this.controllerModalProxy.newOptionBasicSelect;
 
+		this.multiSelectRowCollection 	= this.controllerModalProxy.multiSelectRowCollection;
+		this.newOptionMultiSelect 			= this.controllerModalProxy.newOptionMultiSelect;
+
 		this.groupedSelectRowCollection = this.controllerModalProxy.groupedSelectRowCollection;
 		this.newOptionGroupedSelect 		= this.controllerModalProxy.newOptionGroupedSelect;
 		this.GroupedSelectGroups 				= this.controllerModalProxy.GroupedSelectGroups;
@@ -61,6 +64,7 @@ class leftPanelController{
 					if (this.proxyModel.controls[i].id === this.proxyModel.temporyConfig.selectedControl) this.modelproxyModel = this.proxyModel.controls[i];
 			}
 			if (this.proxyModel.temporyConfig.selectedControl === 'BasicSelect') this.controllerModalProxy.bindBasicSelectFromProxyModel(self.basicSelectRowCollection);
+			if (this.proxyModel.temporyConfig.selectedControl === 'MultiSelect') this.controllerModalProxy.bindMultiSelectFromProxyModel(self.multiSelectRowCollection);
 			if (this.proxyModel.temporyConfig.selectedControl === 'GroupedSelect') this.controllerModalProxy.bindGroupedSelectFromProxyModel(this.groupedSelectRowCollection, this.GroupedSelectGroups);
 			if (this.proxyModel.temporyConfig.selectedControl === 'Radio') this.controllerModalProxy.bindRadioFromProxyModel(this.radioRowCollection);
 		}
@@ -70,6 +74,10 @@ class leftPanelController{
 		//refresh service data for particular controls as selects and radio
 		this.proxyModel.basicSelectRowCollection 		= this.basicSelectRowCollection;
 		this.proxyModel.newOptionBasicSelect 				= this.newOptionBasicSelect;
+
+		this.proxyModel.multiSelectRowCollection 		= this.multiSelectRowCollection;
+		this.proxyModel.newOptionMultiSelect 				= this.newOptionMultiSelect;
+
 		this.proxyModel.groupedSelectRowCollection 	= this.groupedSelectRowCollection;
 		this.proxyModel.newOptionGroupedSelect 			= this.newOptionGroupedSelect;
 		this.proxyModel.GroupedSelectGroups 				= this.GroupedSelectGroups;
@@ -219,6 +227,59 @@ class leftPanelController{
 
 		downThisRow(index){
 			let result = this.$selectOptionMange.downthisOption(this.basicSelectRowCollection, index);
+			if (result.resultFlag === false) {
+				this.toaster.pop({
+					type		: 'warning',
+					timeout	: 2000,
+					title		: result.details,
+					body		: 'Operation cancelled.',
+					showCloseButton: true
+				});
+			}
+		}
+
+		addNewOptionMultiSelect(){
+			let result = this.$selectOptionMange.addNewOptionMultiSelect(this.multiSelectRowCollection, this.newOptionMultiSelect.saisie);
+			if (result.resultFlag === false) {
+				this.toaster.pop({
+					type			: 'warning',
+					timeout		: 2000,
+					title			: result.details,
+					body			: `'${this.newOptionMultiSelect.saisie}' cannot be added.`,
+					showCloseButton: true
+				});
+			}
+			this.newOptionMultiSelect = {saisie: ''}; //reset input
+		}
+
+		removeRowMultiSelect(index) {
+			let result = this.$selectOptionMange.removeOption(this.multiSelectRowCollection, index);
+			if (result.resultFlag === false) {
+				this.toaster.pop({
+					type		: 'warning',
+					timeout	: 2000,
+					title		: result.details,
+					body		: 'Delete was cancelled.',
+					showCloseButton: true
+				});
+			}
+		}
+
+		upThisRowMultiSelect(index){
+				let result = this.$selectOptionMange.upthisOption(this.multiSelectRowCollection, index);
+				if (result.resultFlag === false) {
+					this.toaster.pop({
+						type		: 'warning',
+						timeout	: 2000,
+						title		: result.details,
+						body		: 'Operation cancelled.',
+						showCloseButton: true
+					});
+				}
+		}
+
+		downThisRowMultiSelect(index){
+			let result = this.$selectOptionMange.downthisOption(this.multiSelectRowCollection, index);
 			if (result.resultFlag === false) {
 				this.toaster.pop({
 					type		: 'warning',

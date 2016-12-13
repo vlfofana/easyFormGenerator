@@ -658,6 +658,69 @@ function formlyConfig(formlyConfigProvider, EasyFormGenFormlyBindingModelsProvid
   });
 
   /**
+   * Add multi Select control
+   *
+    * using nya-bs-select
+    */
+  let multiSelectTemplate =	`
+   <select multiple class="form-control" ng-model="model[options.key || index]"></select>`;
+
+  formlyConfigProvider.setType({
+    name 			: 'multiSelect',
+    extends: 'select',
+    template 	: multiSelectTemplate
+  });
+
+  EasyFormGenFormlyBindingModelsProvider.addEasyFormControlToList({
+    id 								: 'MultiSelect',
+    name 							: 'Multi select',
+    subtitle 					: 'Multi select',
+    options 					: [],
+    group 						: 'Select',
+    formlyType 				: 'multiSelect',
+    formlySubtype 		: '',
+    formlyLabel 			: '',
+    formlyRequired 		: false,
+    formlyDesciption 	: '',
+    formlyOptions 		: []
+  });
+
+  /**
+   * drag and drop basic select control template (using textAngular)
+   *
+    *
+    * @PARAM 1 : control template object (drag an drop)
+    * @PARAM 2 : object to indicates in which group of control it will be inserted
+    *  					(related to _dragDropConfigModel.containerConfig.decoration in dragDropConfig provider)
+    */
+  easyFormDragWayConfigProvider.addControlToDragDropPresentationModel(
+  {
+    label 	: `
+      <div class="col-md-12">
+        <div class="form-group">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 selectfordemo">
+
+      <ol class="nya-bs-select col-xs-12 col-sm-12 col-md-12 col-lg-12 ng-valid btn-group ng-dirty ng-valid-parse ng-touched"
+      	ng-model="fakeModelNyaSelectBasic"
+      	data-live-search="false">
+
+         <button class="btn btn-default dropdown-toggle" disabled type="button">
+      		 <span class="pull-left filter-option">
+      			 <span class="ng-binding">Multi select</span>
+      		</span>
+      		&nbsp;<span class="caret"></span>
+        </button>
+
+      </div>
+      </div>`,
+    control	: 'MultiSelect',
+    cssClass: 'col-xs-12'
+  },
+  {
+    addToGroupCtrl : 'selects'
+  });
+
+  /**
    * Add Grouped Select control
    *
     * using nya-bs-select

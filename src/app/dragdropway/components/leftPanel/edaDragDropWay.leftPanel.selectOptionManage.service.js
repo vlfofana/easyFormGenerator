@@ -71,6 +71,29 @@ class selectOptionMange{
       return fullResponse;                        
     }
   }
+
+  addNewOptionMultiSelect(selectObj, newOptionText){
+    console.log('addNewOptionMultiSelect: selectObj', selectObj);
+    console.log('addNewOptionMultiSelect: newOptionText', newOptionText);
+    let fullResponse = {
+      resultFlag  : false,
+      details     : ''
+    };
+    let checkResult = helpers.validOption(selectObj, newOptionText);
+    if (checkResult.resultFlag === true){
+      let newOption = {
+          option  : newOptionText,
+          order   : selectObj.rows.length
+      };
+      selectObj.rows.push(newOption);
+      fullResponse.resultFlag = true;
+      fullResponse.details    = '';
+      return fullResponse;
+    }else{
+      angular.copy(checkResult, fullResponse);
+      return fullResponse;
+    }
+  }
   
   addNewOptionGroupedSelect(selectObj, newOptionText, newOptionGroup){
     let fullResponse = {
