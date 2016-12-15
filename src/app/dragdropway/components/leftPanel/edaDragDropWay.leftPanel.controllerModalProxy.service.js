@@ -27,6 +27,7 @@ class controllerModalProxy{
       control     : {}
     };
     this.basicSelectRowCollection   = angular.copy(INIT_OPTION_MODEL);
+    this.multiSelectRowCollection   = angular.copy(INIT_OPTION_MODEL);
 		this.newOptionBasicSelect 			= angular.copy({ saisie: '' });
 
 		this.groupedSelectRowCollection = angular.copy(INIT_OPTION_MODEL);
@@ -286,6 +287,7 @@ class controllerModalProxy{
 
   resetAllTemporyModels(){
     this.basicSelectRowCollection 	= angular.copy(INIT_OPTION_MODEL);
+    this.multiSelectRowCollection 	= angular.copy(INIT_OPTION_MODEL);
     this.newOptionBasicSelect 			= angular.copy({ saisie: '' });
 
     this.groupedSelectRowCollection = angular.copy(INIT_OPTION_MODEL);
@@ -309,6 +311,9 @@ class controllerModalProxy{
 	bindSpecialCtrlTemporyModelsToProxyModel() {
 		if (this.proxyModel.selectedControl === 'BasicSelect') {
       this.bindBasicSelectToProxyModel(this.basicSelectRowCollection);
+    }
+		if (this.proxyModel.selectedControl === 'MultiSelect') {
+      this.bindMultiSelectToProxyModel(this.multiSelectRowCollection);
     }
 		if (this.proxyModel.selectedControl === 'GroupedSelect') {
       this.bindGroupedSelectToProxyModel(this.groupedSelectRowCollection);
@@ -339,6 +344,35 @@ class controllerModalProxy{
       for (let i = 0; i <= basicSelectRowCollection.rows.length - 1; i++){
         let newOption = {
           'name' : basicSelectRowCollection.rows[i].option,
+          'value': i,
+          'group': ''
+        };
+        this.proxyModel.temporyConfig.formlyOptions.push(newOption);
+      }
+    }
+  }
+
+  // multi select
+  bindMultiSelectFromProxyModel(multiSelectRowCollection){
+    if (this.proxyModel.temporyConfig.formlyOptions.length > 0) {
+      for (let i = 0; i <= this.proxyModel.temporyConfig.formlyOptions.length-1; i++){
+        let newOption = {
+          'option' 	: this.proxyModel.temporyConfig.formlyOptions[i].name,
+          'order' 	: i,
+          'group' 	: ''
+        };
+        multiSelectRowCollection.rows.push(newOption);
+      }
+    }
+  }
+
+  bindMultiSelectToProxyModel(multiSelectRowCollection){
+    let resetNyASelectOptions = [];
+    this.proxyModel.temporyConfig.formlyOptions = resetNyASelectOptions;
+    if (multiSelectRowCollection.rows.length > 0) {
+      for (let i = 0; i <= multiSelectRowCollection.rows.length - 1; i++){
+        let newOption = {
+          'name' : multiSelectRowCollection.rows[i].option,
           'value': i,
           'group': ''
         };

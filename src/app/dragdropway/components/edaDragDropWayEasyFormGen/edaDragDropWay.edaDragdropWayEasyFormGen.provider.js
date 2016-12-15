@@ -102,6 +102,7 @@ function easyFormDragWayConfig() {
 			{name: 'Radio', 					enabled: true},
 			{name: 'Checkbox', 				enabled: true},
 			{name: 'BasicSelect', 		enabled: true},
+			{name: 'MultiSelect', 		enabled: true},
 			{name: 'GroupedSelect', 	enabled: true}
 		];
 		return controls;
