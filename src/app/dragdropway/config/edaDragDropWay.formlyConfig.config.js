@@ -663,11 +663,17 @@ function formlyConfig(formlyConfigProvider, EasyFormGenFormlyBindingModelsProvid
     * using nya-bs-select
     */
   let multiSelectTemplate =	`
-   <select multiple class="form-control" ng-model="model[options.key || index]"></select>`;
+   <ol class="nya-bs-select col-sm-12 col-xs-12 col-md-12 col-lg12"
+  		ng-model="model[options.key || index]"
+  		id="{{id}}"
+  		disabled="options.templateOptions.options.length === 0" multiple>
+     <li class="nya-bs-option" nya-bs-option="option in options.templateOptions.options">
+       <a>{{option.name}}</a>
+     </li>
+   </ol> `;
 
   formlyConfigProvider.setType({
     name 			: 'multiSelect',
-    extends: 'select',
     template 	: multiSelectTemplate
   });
 
