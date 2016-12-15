@@ -154,6 +154,56 @@ function formlyConfig(formlyConfigProvider, EasyFormGenFormlyBindingModelsProvid
     }
   );
 
+/**
+   * Add text input (Number)
+   *
+    * note : formly template already exists
+    * no need to create a custom one
+    *
+    * just declare in EasyFormGenFormlyBindingModelsProvider
+    */
+  EasyFormGenFormlyBindingModelsProvider.addEasyFormControlToList({
+      id 								: 'Number',
+      name 							: 'Number',
+      subtitle 					: 'Number',
+      group 						: 'input',
+      formlyType 				: 'input',
+      formlySubtype 		: 'number',
+      formlyLabel 			: '',
+      formlyRequired 		: false,
+      formlyDesciption 	: '',
+      formlyOptions 		: []
+    }
+  );
+  /**
+   * drag and drop text input — number —control template
+   *
+    *
+    * @PARAM 1 : control template object (drag an drop)
+    * @PARAM 2 : object to indicates in which group of control it will be inserted
+    *  					(related to _dragDropConfigModel.containerConfig.decoration in dragDropConfig provider)
+    */
+  easyFormDragWayConfigProvider.addControlToDragDropPresentationModel({
+      'label' 	:
+        `<div class="col-md-12">
+          <div class="form-group">
+            <label for="inputNumber" class="control-label textControlLabel ng-binding pull-left">
+            title for number input<span class="textControlLabel ng-scope">*</span>
+            </label>
+            <div class="">
+              <input type="number" disabled class="form-control fakeControl" id="inputNumber" placeholder="number input">
+              <p class="help-block ng-binding pull-left">Description</p>
+            </div>
+          </div>
+        </div>`,
+      'control'	: 'Number',
+      'cssClass': 'col-xs-12'
+    },
+    {
+      addToGroupCtrl : 'inputs'
+    }
+  );
+
   /**
    * Add text input (Password)
    *

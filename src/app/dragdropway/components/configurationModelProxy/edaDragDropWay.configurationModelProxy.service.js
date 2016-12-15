@@ -209,7 +209,9 @@ class ddModelConfModelProxyService{
     //set subtype :	
     this.$parse('control.subtype').assign(configurationCtrlModel, this.$parse('formlySubtype')(formlyDetailCtrlModel));
     //set templateOptions.label :	
-    this.$parse('control.templateOptions.label').assign(configurationCtrlModel, this.$parse('formlyLabel')(formlyDetailCtrlModel));					
+    this.$parse('control.templateOptions.label').assign(configurationCtrlModel, this.$parse('formlyLabel')(formlyDetailCtrlModel));
+    //set templateOptions.type :
+    this.$parse('control.templateOptions.type').assign(configurationCtrlModel, this.$parse('formlySubtype')(formlyDetailCtrlModel));
     //set templateOptions.required :	
     this.$parse('control.templateOptions.required').assign(configurationCtrlModel, this.$parse('formlyRequired')(formlyDetailCtrlModel));	
     //set templateOptions.required :	
