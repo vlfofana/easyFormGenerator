@@ -30,7 +30,8 @@ const DRAG_DROP_MODULES_INJECT 		= [
 	easyFormDragDropModule.name,
 	rightClickModule.name,
   dragAndDropListModule.name,
-  pageSlideModule.name
+  pageSlideModule.name,
+	'formlyRepeatingSection'
 ];
 
 let mainModule = angular

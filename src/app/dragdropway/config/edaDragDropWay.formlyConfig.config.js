@@ -794,6 +794,123 @@ function formlyConfig(formlyConfigProvider, EasyFormGenFormlyBindingModelsProvid
     addToGroupCtrl : 'selects'
   });
 
+  /**
+   * Add Repeat section control
+   *
+    * using nya-bs-select
+    */
+  let repeatSectionTemplate =	`
+  <div class="panel panel-default">
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-12"><h5 class="greyText"><i class="fa fa-eye"></i> &nbsp; {{ 'PREVIEW_TAB' }}
+                : </h5></div>
+        </div>
+        <hr/>
+        <div class="row">
+            <div class="col-md-12"><h5 class="text-center texteRouge ng-binding" ng-show="$ctrl.isInvalidJson"> Invalid
+                json </h5>
+                <div ng-hide="$ctrl.isInvalidJson">
+                    <div class="repeatsection" ng-repeat="element in $ctrl.model">
+                        <formly-form model="element" fields="$ctrl.fields" form="form"></formly-form>
+                        <div style="margin-bottom:20px">
+                            <button type=button class="btn btn-sm btn-danger" ng-click="$ctrl.model.splice($index, 1)">
+                                Remove
+                            </button>
+                        </div>
+                        <hr>
+                    </div>
+                    <p class="AddNewButton">
+                        <button type=button class="btn btn-primary" ng-click="$ctrl.model.push({})">
+                            {{$ctrl.nyaSelect.temporyConfig.formlyBtnText}}</button>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-12"><h5 class="greyText"><i class="fa fa-pencil-square-o"></i>
+                &nbsp; {{ 'EDIT_PROPERTIES' }} : </h5></div>
+        </div>
+        <hr/>
+        <div class="row">
+            <div class="form-group"><label for="inputDescriptionUpdate"
+                                           class="col-lg-3 control-label greyText editPropertiesLabel"> Description
+                : </label>
+                <div class="col-lg-9"><input type="text" class="form-control"
+                                             ng-model="$ctrl.nyaSelect.temporyConfig.formlyDescription"
+                                             id="inputDescriptionUpdate" placeholder="Description here"></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group"><label for="inputButtonTextUpdate"
+                                           class="col-lg-3 control-label greyText editPropertiesLabel"> Button text
+                : </label>
+                <div class="col-lg-9"><input type="text" class="form-control"
+                                             ng-model="$ctrl.nyaSelect.temporyConfig.formlyBtnText"
+                                             id="inputButtonTextUpdate" placeholder="Button text here"></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group"><label for="inputKeyUpdate"
+                                           class="col-lg-3 control-label greyText editPropertiesLabel"> Key : </label>
+                <div class="col-lg-9"><input type="text" class="form-control"
+                                             ng-model="$ctrl.nyaSelect.temporyConfig.formlyKey" id="inputKeyUpdate"
+                                             placeholder="Key here"></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group"><label for="inputFieldsJsonUpdate"
+                                           class="col-lg-3 control-label greyText editPropertiesLabel"> Field template
+                : </label>
+                <div class="col-lg-9"><textarea class="form-control" ng-change='$ctrl.setFields()'
+                                                ng-model="$ctrl.fieldsJson" id="inputFieldsJsonUpdate"></textarea></div>
+            </div>
+        </div>
+    </div>
+</div>`;
+
+  formlyConfigProvider.setType({
+    name   		: 'RepeatSection',
+    template 	: repeatSectionTemplate
+  });
+
+  EasyFormGenFormlyBindingModelsProvider.addEasyFormControlToList({
+    id 								: 'RepeatSection',
+    name 							: 'RepeatSection',
+    subtitle 					: 'RepeatSection',
+    options 					: [],
+    group 						: 'Section',
+    formlyType 				: 'repeatSection',
+    formlySubtype 		: '',
+    formlyLabel 			: '',
+    formlyRequired 		: false,
+    formlyDesciption 	: '',
+    formlyOptions 		: []
+  });
+  /**
+   * drag and drop repeat section control template (using textAngular)
+   *
+    *
+    * @PARAM 1 : control template object (drag an drop)
+    * @PARAM 2 : object to indicates in which group of control it will be inserted
+    *  					(related to _dragDropConfigModel.containerConfig.decoration in dragDropConfig provider)
+    */
+  easyFormDragWayConfigProvider.addControlToDragDropPresentationModel({
+    label 	: `
+    <div class="col-md-12">
+      <p class="help-block ng-binding padding-top-38px">RepeatSection</p>
+    </div>`,
+    control	: 'RepeatSection',
+    cssClass: 'col-xs-12'
+  },
+  {
+    addToGroupCtrl : 'section'
+  });
+
 
 }
 

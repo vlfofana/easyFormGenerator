@@ -56,6 +56,9 @@ import leftPanelBasicSelectControl, {
 import leftPanelMultiSelectControl, {
   LEFT_PANEL_MULTI_SELECT_CONTROL_DIRECTIVE
 }                           from './MultiSelectControl/edaDragDropWay.leftpanel.multiSelectControl.directive';
+import leftPanelRepeatSectionControl, {
+  LEFT_PANEL_REPEAT_SECTION_CONTROL_DIRECTIVE
+}                           from './RepeatSectionControl/edaDragDropWay.leftpanel.repeatSectionControl.directive';
 
 
 const LEFT_PANEL_MODULE = 'edaDragDropWay.leftPanel.module';
@@ -80,4 +83,5 @@ export default angular
                 .directive(LEFT_PANEL_CHECKBOX_CONTROL_DIRECTIVE, leftPanelCheckBoxControl)
                 .directive(LEFT_PANEL_BLANK_CONTROL_DIRECTIVE, leftPanelBlankControl)
                 .directive(LEFT_PANEL_BASIC_SELECT_CONTROL_DIRECTIVE, leftPanelBasicSelectControl)
-                .directive(LEFT_PANEL_MULTI_SELECT_CONTROL_DIRECTIVE, leftPanelMultiSelectControl);
+                .directive(LEFT_PANEL_MULTI_SELECT_CONTROL_DIRECTIVE, leftPanelMultiSelectControl)
+                .directive(LEFT_PANEL_REPEAT_SECTION_CONTROL_DIRECTIVE, leftPanelRepeatSectionControl);

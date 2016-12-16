@@ -28,6 +28,7 @@ class controllerModalProxy{
     };
     this.basicSelectRowCollection   = angular.copy(INIT_OPTION_MODEL);
     this.multiSelectRowCollection   = angular.copy(INIT_OPTION_MODEL);
+    this.RepeatSectionRowCollection = angular.copy(INIT_OPTION_MODEL);
 		this.newOptionBasicSelect 			= angular.copy({ saisie: '' });
 
 		this.groupedSelectRowCollection = angular.copy(INIT_OPTION_MODEL);
@@ -38,6 +39,9 @@ class controllerModalProxy{
 
 		this.radioRowCollection 				= angular.copy(INIT_OPTION_MODEL);
 		this.newOptionRadio 						= angular.copy({ saisie: '' });
+
+
+    this.repeatSectionFieldsJson = '[{ "className": "row", "fieldGroup": [{ "className": "col-xs-4", "type": "input", "key": "itemName", "templateOptions": { "label": "Item", "required": true } }, { "className": "col-xs-4", "type": "input", "key": "itemQuantity", "templateOptions": { "label": "Quantity", "required": true, "type": "number" } }] }]';
   }
 
 
@@ -193,6 +197,9 @@ class controllerModalProxy{
       if (this.proxyModel.temporyConfig.selectedControl === 'Date') {
         this.proxyModel.temporyConfig.datepickerPopup = typeof configurationObj.lines[indexLine].columns[numcolumn].control.templateOptions.datepickerPopup != 'undefined' ? configurationObj.lines[indexLine].columns[numcolumn].control.templateOptions.datepickerPopup : '';
       }
+
+      this.proxyModel.leftPanelCtrl.initNyaSelectConformingSelectedControl();
+
       // console.info('debug setProxyModelFromConfigurationSelection');
       // console.dir({
       //   selectedControl : angular.copy(this.proxyModel.selectedControl ),
@@ -309,6 +316,7 @@ class controllerModalProxy{
 	 * -> so its tempory models are bound to proxyModel
 	 */
 	bindSpecialCtrlTemporyModelsToProxyModel() {
+      console.log('bindSpecialCtrlTemporyModelsToProxyModel', this.RepeatSectionRowCollection);
 		if (this.proxyModel.selectedControl === 'BasicSelect') {
       this.bindBasicSelectToProxyModel(this.basicSelectRowCollection);
     }
@@ -321,10 +329,14 @@ class controllerModalProxy{
 		if (this.proxyModel.selectedControl === 'Radio') {
       this.bindRadioToProxyModel(this.radioRowCollection);
     }
+		if (this.proxyModel.selectedControl === 'RepeatSection') {
+      this.bindRepeatSectionToProxyModel();
+    }
 	}
 
   // basic select
   bindBasicSelectFromProxyModel(basicSelectRowCollection){
+    console.log('bindBasicSelectFromProxyModel: basicSelectRowCollection', basicSelectRowCollection);
     if (this.proxyModel.temporyConfig.formlyOptions.length > 0) {
       for (let i = 0; i <= this.proxyModel.temporyConfig.formlyOptions.length-1; i++){
         let newOption = {
@@ -338,6 +350,7 @@ class controllerModalProxy{
   }
 
   bindBasicSelectToProxyModel(basicSelectRowCollection){
+    console.log('bindBasicSelectToProxyModel: basicSelectRowCollection', basicSelectRowCollection);
     let resetNyASelectOptions = [];
     this.proxyModel.temporyConfig.formlyOptions = resetNyASelectOptions;
     if (basicSelectRowCollection.rows.length > 0) {
@@ -367,6 +380,7 @@ class controllerModalProxy{
   }
 
   bindMultiSelectToProxyModel(multiSelectRowCollection){
+    console.log('!!!!!!! this.proxyModel', this.proxyModel);
     let resetNyASelectOptions = [];
     this.proxyModel.temporyConfig.formlyOptions = resetNyASelectOptions;
     if (multiSelectRowCollection.rows.length > 0) {
@@ -438,6 +452,40 @@ class controllerModalProxy{
         this.proxyModel.temporyConfig.formlyOptions.push(newOption);
       }
     }
+  }
+
+  // repeating section
+	bindRepeatSectionFromProxyModel(repeatSectionRowCollection, repeatSectionFieldsJson){
+      console.log('bindRepeatSectionFromProxyModel: repeatSectionRowCollection', repeatSectionRowCollection);
+    if (this.proxyModel.temporyConfig.formlyOptions.length > 0) {
+      for (let i = 0; i <= this.proxyModel.temporyConfig.formlyOptions.length-1; i++){
+          let newOption = {
+            'option'	: this.proxyModel.temporyConfig.formlyOptions[i].name,
+            'order'		: i,
+            'group'		: ''
+          };
+          repeatSectionRowCollection.rows.push(newOption);
+      }
+    }
+    this.proxyModel.temporyConfig.fieldsJson = repeatSectionFieldsJson;
+    this.proxyModel.temporyConfig.model = [{}, {}];
+      this.proxyModel.temporyConfig.formlyKey = 'items';
+      this.proxyModel.temporyConfig.formlyBtnText = 'Add item';
+      this.proxyModel.temporyConfig.formlyDescription = 'Description';
+      this.proxyModel.leftPanelCtrl.setFields();
+	}
+
+  bindRepeatSectionToProxyModel(){
+    let resetproxyModelOptions = [];
+    this.proxyModel.temporyConfig.formlyOptions = resetproxyModelOptions;
+
+
+    console.log('!!!!!!! this.proxyModel', this.proxyModel);
+
+    this.proxyModel.temporyConfig.formlyOptions = {
+      btnText: this.proxyModel.temporyConfig.formlyBtnText,
+      fields: JSON.parse(this.proxyModel.temporyConfig.fieldsJson)
+    };
   }
 
 

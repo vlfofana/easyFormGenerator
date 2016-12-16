@@ -112,11 +112,16 @@ class formFieldManage{
           controlTemplate.type                        = column.control.type;
           controlTemplate.key                         = column.control.key;
           controlTemplate.templateOptions.type        = column.control.templateOptions.type;
+
           controlTemplate.templateOptions.label       = column.control.templateOptions.label;
           controlTemplate.templateOptions.required    = column.control.templateOptions.required;
           controlTemplate.templateOptions.placeholder = column.control.templateOptions.placeholder;
           controlTemplate.templateOptions.description = column.control.templateOptions.description;
-          controlTemplate.templateOptions.options     = [].concat(column.control.templateOptions.options);
+          if (controlTemplate.type === 'repeatSection') {
+            controlTemplate.templateOptions.options     = column.control.templateOptions.options;
+          } else {
+            controlTemplate.templateOptions.options     = [].concat(column.control.templateOptions.options);
+          }
 
           if (typeof controlTemplate.templateOptions.datepickerPopup !== 'undefined')  column.control.templateOptions.datepickerPopup = controlTemplate.templateOptions.datepickerPopup  ;
         }
