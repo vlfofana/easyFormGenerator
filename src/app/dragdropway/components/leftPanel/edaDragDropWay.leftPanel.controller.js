@@ -21,8 +21,20 @@ class leftPanelController{
 		this.init();
 	}
 
+	setFields () {
+              try {
+                var raw = this.proxyModel.temporyConfig.fieldsJson;
+                this.proxyModel.temporyConfig.fields = JSON.parse(raw);
+                this.proxyModel.isInvalidJson = false;
+              } catch (ex) {
+                this.proxyModel.isInvalidJson = true;
+              }
+            };
+
 	init() {
 		this.proxyModel 								= this.controllerModalProxy.proxyModel;
+		this.proxyModel.leftPanelCtrl = this;
+
 		this.proxyModel.selectedControl = this.proxyModel.temporyConfig.selectedControl;
 		this.basicSelectRowCollection 	= this.controllerModalProxy.basicSelectRowCollection;
 		this.newOptionBasicSelect 			= this.controllerModalProxy.newOptionBasicSelect;
@@ -42,6 +54,10 @@ class leftPanelController{
 		this.demodt 										= {};
 		this.demodt.formats							= dateFormats;
 		this.dateOptions								= this.getDateOptions();
+
+
+		this.repeatSectionRowCollection = [{}, {}];
+		this.repeatSectionFieldsJson = '[{ "className": "row", "fieldGroup": [{ "className": "col-xs-4", "type": "input", "key": "itemName", "templateOptions": { "label": "Item", "required": true } }, { "className": "col-xs-4", "type": "input", "key": "itemQuantity", "templateOptions": { "label": "Quantity", "required": true, "type": "number" } }] }]';
 
 		// this.controllerModalProxy.resetAllTemporyModels();
     this.initNyaSelectConformingSelectedControl();
@@ -67,6 +83,7 @@ class leftPanelController{
 			if (this.proxyModel.temporyConfig.selectedControl === 'MultiSelect') this.controllerModalProxy.bindMultiSelectFromProxyModel(self.multiSelectRowCollection);
 			if (this.proxyModel.temporyConfig.selectedControl === 'GroupedSelect') this.controllerModalProxy.bindGroupedSelectFromProxyModel(this.groupedSelectRowCollection, this.GroupedSelectGroups);
 			if (this.proxyModel.temporyConfig.selectedControl === 'Radio') this.controllerModalProxy.bindRadioFromProxyModel(this.radioRowCollection);
+			if (this.proxyModel.temporyConfig.selectedControl === 'RepeatSection') this.controllerModalProxy.bindRepeatSectionFromProxyModel(this.repeatSectionRowCollection, this.repeatSectionFieldsJson);
 		}
 	}
 

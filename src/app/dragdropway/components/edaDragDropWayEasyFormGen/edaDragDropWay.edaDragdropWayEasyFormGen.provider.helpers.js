@@ -85,7 +85,14 @@ const DRAG_DROP_CONFIG_MODEL =  {
         title         : 'Selects : ',
         groupId       : 'selects',
         isCollapsed   : true 
-      } 
+      } ,
+      {
+        WhenIndex     : 7,
+        ApplycssClass : 'col-md-12',
+        title         : 'Section : ',
+        groupId       : 'section',
+        isCollapsed   : true
+      }
     ],
     verboseMode     : false, 
     collapseEnabled : true,

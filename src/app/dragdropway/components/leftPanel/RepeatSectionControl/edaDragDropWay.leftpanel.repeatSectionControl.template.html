@@ -1,0 +1,75 @@
+<div class="panel panel-default">
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-12"><h5 class="greyText"><i class="fa fa-eye"></i> &nbsp; {{ 'PREVIEW_TAB' }}
+                : </h5></div>
+        </div>
+        <hr/>
+        <div class="row">
+            <div class="col-md-12"><h5 class="text-center texteRouge ng-binding" ng-show="leftPanelCtrl.proxyModel.isInvalidJson"> Invalid
+                json </h5>
+                <div ng-hide="leftPanelCtrl.proxyModel.isInvalidJson">
+                    <div class="repeatsection" ng-repeat="element in leftPanelCtrl.proxyModel.temporyConfig.model">
+                        <formly-form model="element" fields="leftPanelCtrl.proxyModel.temporyConfig.fields" form="form"></formly-form>
+                        <div style="margin-bottom:20px">
+                            <button type=button class="btn btn-sm btn-danger" ng-click="leftPanelCtrl.proxyModel.temporyConfig.model.splice($index, 1)">
+                                Remove
+                            </button>
+                        </div>
+                        <hr>
+                    </div>
+                    <p class="AddNewButton">
+                        <button type=button class="btn btn-primary" ng-click="leftPanelCtrl.proxyModel.temporyConfig.model.push({})">
+                            <span ng-show="leftPanelCtrl.proxyModel.temporyConfig.formlyBtnText">{{ leftPanelCtrl.proxyModel.temporyConfig.formlyBtnText }}</span>
+                            <span ng-hide="leftPanelCtrl.proxyModel.temporyConfig.formlyBtnText">Add item</span>
+                         </button>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-12"><h5 class="greyText"><i class="fa fa-pencil-square-o"></i>
+                &nbsp; {{ 'EDIT_PROPERTIES' }} : </h5></div>
+        </div>
+        <hr/>
+        <div class="row">
+            <div class="form-group"><label for="inputDescriptionUpdate"
+                                           class="col-lg-3 control-label greyText editPropertiesLabel"> Description
+                : </label>
+                <div class="col-lg-9"><input type="text" class="form-control"
+                                             ng-model="leftPanelCtrl.proxyModel.temporyConfig.formlyDescription"
+                                             id="inputDescriptionUpdate" placeholder="Description here"></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group"><label for="inputButtonTextUpdate"
+                                           class="col-lg-3 control-label greyText editPropertiesLabel"> Button text
+                : </label>
+                <div class="col-lg-9"><input type="text" class="form-control"
+                                             ng-model="leftPanelCtrl.proxyModel.temporyConfig.formlyBtnText"
+                                             id="inputButtonTextUpdate" placeholder="Button text here"></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group"><label for="inputKeyUpdate"
+                                           class="col-lg-3 control-label greyText editPropertiesLabel"> Key : </label>
+                <div class="col-lg-9"><input type="text" class="form-control"
+                                             ng-model="leftPanelCtrl.proxyModel.temporyConfig.formlyKey" id="inputKeyUpdate"
+                                             placeholder="Key here"></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group"><label for="inputFieldsJsonUpdate"
+                                           class="col-lg-3 control-label greyText editPropertiesLabel"> Field template
+                : </label>
+                <div class="col-lg-9"><textarea class="form-control" ng-change='leftPanelCtrl.setFields()'
+                                                ng-model="leftPanelCtrl.proxyModel.temporyConfig.fieldsJson" id="inputFieldsJsonUpdate"></textarea></div>
+            </div>
+        </div>
+    </div>
+    <left-panel-valid-edit-footer />
+</div>
